@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="now" value="now()" dbms="mysql"/>
+
+    <changeSet author="soundar" id="1">
+        <createTable tableName="category">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sku_type" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
+        </createTable>
+
+        <createTable tableName="product">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sku" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_product_category_id" references="category(id)"/>
+            </column>
+            <column name="stock" type="BIGINT" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="BIGINT" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currency" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
+        </createTable>
+
+        <createTable tableName="user">
+            <column name="id" autoIncrement="true" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="api_key" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_admin" type="BOOLEAN" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime"/>
+            <column name="updated_at" type="datetime"/>
+        </createTable>
+        
+        <insert tableName="category">
+            <column name="name" value="Home"/>
+            <column name="sku_type" value="1000xxxx"/>
+            <column name="created_at" value="NOW()"/>
+            <column name="updated_at" value="NOW()"/>
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="Garden"/>
+            <column name="sku_type" value="2000xxxx"/>
+            <column name="created_at" value="NOW()"/>
+            <column name="updated_at" value="NOW()"/>
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="Electronics"/>
+            <column name="sku_type" value="3000xxxx"/>
+            <column name="created_at" value="NOW()"/>
+            <column name="updated_at" value="NOW()"/>
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="Fitness"/>
+            <column name="sku_type" value="4000xxxx"/>
+            <column name="created_at" value="NOW()"/>
+            <column name="updated_at" value="NOW()"/>
+        </insert>
+        <insert tableName="category">
+            <column name="name" value="Toys"/>
+            <column name="sku_type" value="5000xxxx"/>
+            <column name="created_at" value="NOW()"/>
+            <column name="updated_at" value="NOW()"/>
+        </insert>
+
+        <insert tableName="user">
+            <column name="name" value="owner"/>
+            <column name="api_key" value="2e7d3af9-7bd6-4b4e-897e-7457c2955fa5"/>
+            <column name="created_at" value="NOW()"/>
+            <column name="updated_at" value="NOW()"/>
+        </insert>
+        <insert tableName="user">
+            <column name="name" value="customer"/>
+            <column name="api_key" value="81c8f858-3bda-44fa-b27e-fce1ef6207f8"/>
+            <column name="created_at" value="NOW()"/>
+            <column name="updated_at" value="NOW()"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
